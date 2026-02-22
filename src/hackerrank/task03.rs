@@ -10,17 +10,23 @@ fn build_staircase(n: usize) -> Vec<String>
     result
 }
 
-#[allow(dead_code)]
-fn main()
+fn staircase(n: i32) 
 {
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-    if let Ok(n) = input.trim().parse::<usize>() 
+    let lines = build_staircase(n as usize);
+    for line in lines 
     {
-        let lines = build_staircase(n);
-        for line in lines 
+        println!("{}", line);
+    }
+}
+
+#[allow(dead_code)]
+fn main() {
+    let mut input_string = String::new();
+    if io::stdin().read_line(&mut input_string).is_ok() 
+    {
+        if let Ok(n) = input_string.trim().parse::<i32>() 
         {
-            println!("{}", line);
+            staircase(n);
         }
     }
 }
@@ -31,15 +37,18 @@ mod tests
     use super::*;
 
     #[test]
-    fn test_staircase_size_3() 
+    fn test_staircase_size_6() 
     {
         let expected = vec!
         [
-            "  #",
-            " ##",
-            "###"
+            "     #",
+            "    ##",
+            "   ###",
+            "  ####",
+            " #####",
+            "######"
         ];
-        assert_eq!(build_staircase(3), expected);
+        assert_eq!(build_staircase(6), expected);
     }
 
     #[test]
